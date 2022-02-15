@@ -21,7 +21,15 @@ public class ResponseHandler {
         }
     }
 
-    public void replyToMessages() {
-
+    public void replyToMessages(long chatId, String str) {
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(String.valueOf(chatId));
+        sendMessage.setText(str);
+        try {
+            sender.execute(sendMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
     }
+
 }
