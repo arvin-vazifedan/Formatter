@@ -1,5 +1,5 @@
 target/
 .idea
 out/
-!/IndetiBot
-!/src/main/java/META-INF/
+IndetiBot
+src/main/java/META-INF/

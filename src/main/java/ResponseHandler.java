@@ -20,4 +20,8 @@ public class ResponseHandler {
             e.printStackTrace();
         }
     }
+
+    public void replyToMessages() {
+
+    }
 }
