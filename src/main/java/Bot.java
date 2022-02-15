@@ -17,26 +17,17 @@ public class Bot extends AbilityBot {
         responseHandler = new ResponseHandler(sender);
     }
 
-
     @Override
     public long creatorId() {
         return Constants.CREATOR_ID;
     }
 
-    public Ability startCommand() {
-        return Ability
-            .builder()
-            .name("start")
-            .info("")
-            .locality(ALL)
-            .privacy(Privacy.PUBLIC)
-            .action(ctx -> responseHandler.replyToStart(ctx.chatId()))
-            .build();
-    }
-
-
     @Override
     public void onUpdateReceived(Update update) {
-
+        if (update.getMessage().getText().equals("/start")) {
+            responseHandler.replyToStart(update.getMessage().getChatId());
+        } else if (update.hasMessage()) {
+            responseHandler.replyToMessages(update.getMessage().getChatId(), update.getMessage().getText());
+        }
     }
 }
