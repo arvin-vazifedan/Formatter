@@ -1,18 +1,20 @@
 public class Formatter {
 
+   private Formatter(){
+     throw new IllegalStateException("Utility class");
+   }
+
     public static String format(String str) {
         if (textContainsArabic(str)) {
-            //TODO fix non whitespace issue: look,if
             System.out.println("AR");
-            str = str.replaceAll("\\s*(?=[.,!:" + "؟،؛" + "{\\[(<])", "");
-            str = str.replaceAll("(?<=[.,!:" + "؟،؛" + "}\\])>]\\s)\\s*", "");
+            String s = "؟،؛";
+            str = str.replaceAll("\\s*(?=[.,!:" + s + "{\\[(<])|(?<=[.,!:" + s + "}\\])>])\\s*", "");
+            str = str.replaceAll("(?<=[.," + s + ":}\\])>])", " ");
         } else {
             System.out.println("EN");
-            str = str.replaceAll("\\s*(?=[.,?!:;{\\[(<])", "");
-            str = str.replaceAll("(?<=[.,?!:;}\\])>]\\s)\\s*", "");
+            str = str.replaceAll("\\s*(?=[.,?!:;{\\[(<])|(?<=[.,?!:;}\\])>])\\s*", "");
+            str = str.replaceAll("(?<=[.,?!;:}\\])>])", " ");
         }
-        // str = str.replaceAll("\\b(?=[+\\-*^/%=])", " ");
-        // str = str.replaceAll("(?<=[+\\-*^/%=])\\b", " ");
         return str;
     }
 
@@ -22,4 +24,6 @@ public class Formatter {
                 return true;
         return false;
     }
+
 }
+
