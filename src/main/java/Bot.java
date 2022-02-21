@@ -1,11 +1,7 @@
 import org.telegram.abilitybots.api.bot.AbilityBot;
-import org.telegram.abilitybots.api.objects.Ability;
-import org.telegram.abilitybots.api.objects.Privacy;
 import org.telegram.abilitybots.api.toggle.BareboneToggle;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.meta.api.objects.Update;
-
-import static org.telegram.abilitybots.api.objects.Locality.ALL;
 
 public class Bot extends AbilityBot {
 
