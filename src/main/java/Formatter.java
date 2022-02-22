@@ -9,11 +9,11 @@ public class Formatter {
             System.out.println("AR");
             String s = "؟،؛";
             str = str.replaceAll("\\s*(?=[.,!:" + s + "{\\[(<])|(?<=[.,!:" + s + "}\\])>])\\s*", "");
-            str = str.replaceAll("(?<=[.," + s + ":}\\])>])", " ");
+            str = str.replaceAll("(?<=[.," + s + ":}\\])>]\\b)", " ");
         } else {
             System.out.println("EN");
             str = str.replaceAll("\\s*(?=[.,?!:;{\\[(<])|(?<=[.,?!:;}\\])>])\\s*", "");
-            str = str.replaceAll("(?<=[.,?!;:}\\])>])", " ");
+            str = str.replaceAll("(?<=[.,?!;:}\\])>])\\b", " ");
         }
         return str;
     }
