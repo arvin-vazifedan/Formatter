@@ -1,10 +1,16 @@
 import org.telegram.abilitybots.api.bot.AbilityBot;
+import org.telegram.abilitybots.api.bot.BaseAbilityBot;
+import org.telegram.abilitybots.api.objects.Flag;
+import org.telegram.abilitybots.api.objects.Reply;
 import org.telegram.abilitybots.api.toggle.BareboneToggle;
 import org.telegram.telegrambots.bots.DefaultBotOptions;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
+import java.util.function.BiConsumer;
+
 public class Bot extends AbilityBot {
 
+    //This toggle can be used to turn off ALL the default abilities supplied by the library.
     private static final BareboneToggle toggle = new BareboneToggle();
     private final ResponseHandler responseHandler;
 
@@ -18,12 +24,16 @@ public class Bot extends AbilityBot {
         return Constants.CREATOR_ID;
     }
 
-    @Override
-    public void onUpdateReceived(Update update) {
-        if (update.getMessage().getText().equals("/start")) {
-            responseHandler.replyToStart(update.getMessage().getChatId());
-        } else if (update.hasMessage()) {
+    public Reply replyToMessage() {
+        BiConsumer<BaseAbilityBot, Update> action = (bot, update) ->
             responseHandler.replyToMessages(update.getMessage().getChatId(), update.getMessage().getText());
-        }
+        return Reply.of(action, Flag.TEXT);
     }
+
+    public Reply replyToInlineQuery() {
+        BiConsumer<BaseAbilityBot, Update> action = (bot, update) ->
+            responseHandler.answerToInline(update.getInlineQuery().getId(), update.getInlineQuery().getQuery());
+        return Reply.of(action, Flag.INLINE_QUERY);
+    }
+
 }
