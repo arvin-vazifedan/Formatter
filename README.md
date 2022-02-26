@@ -1,1 +1,2 @@
-# Simple Telegram bot that uses REGEX to format given text input.
+## Formatter Bot
+Simple telegram bot that uses REGEX to format given text input.
